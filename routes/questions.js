@@ -1,15 +1,13 @@
-'use strict';
 const express = require('express');
-
-const Question = require('../models/question');
 
 const router = express.Router();
 const passport = require('passport');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const data = require('../db/data');
 const jwt = require('jsonwebtoken');
+const data = require('../db/data');
+const Question = require('../models/question');
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 // router.use(jwtAuth);
@@ -21,7 +19,7 @@ router.get('/', (req, res, next) => {
   // let filter = { userId };
   Question.find()
     .sort({
-      createdAt: -1
+      createdAt: -1,
     })
     .populate('userId')
     .then(results => {
@@ -78,9 +76,9 @@ router.post('/answer/:id', jwtAuth, (req, res, next) => {
     $push: {
       answers: {
         content: req.body.content,
-        userId: req.user.id
-      }
-    }
+        userId: req.user.id,
+      },
+    },
   };
   Question.findOneAndUpdate(query, update)
     .then(result => {

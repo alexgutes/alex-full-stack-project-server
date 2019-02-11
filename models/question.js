@@ -10,10 +10,10 @@ const questionSchema = new mongoose.Schema({
       userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
-      }
-    }
-  ]
+        required: true,
+      },
+    },
+  ],
 });
 
 questionSchema.set('timestamps', true);
@@ -25,5 +25,5 @@ questionSchema.set('toObject', {
   transform: (doc, ret) => {
     delete ret._id; // delete `_id`
     delete ret.__v;
-  }
+  },
 });

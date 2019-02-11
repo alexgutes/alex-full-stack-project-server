@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
   firstName: { type: String, default: '' },
   lastName: { type: String, default: '' },
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
 });
 
 schema.set('toObject', {
@@ -15,13 +15,13 @@ schema.set('toObject', {
     delete result.__v;
     delete result.password;
     return result;
-  }
+  },
 });
 
 schema.methods.serialize = function() {
   return {
     username: this.username || '',
-    id: this._id
+    id: this._id,
   };
 };
 

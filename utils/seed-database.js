@@ -9,10 +9,7 @@ const { users, questions } = require('../db/data');
 
 console.log(`Connecting to mongodb at ${DATABASE_URL}`);
 mongoose
-  .connect(
-    DATABASE_URL,
-    { useNewUrlParser: true }
-  )
+  .connect(DATABASE_URL, { useNewUrlParser: true })
   .then(() => {
     console.info('Delete Data');
     return Promise.all([User.deleteMany(), Question.deleteMany()]);
@@ -21,7 +18,7 @@ mongoose
     console.info('Seeding Database');
     return Promise.all([
       User.insertMany(users),
-      Question.insertMany(questions)
+      Question.insertMany(questions),
     ]);
   })
   .then(results => {
